@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: springboot-kafka-tutorial
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: first-consumer-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      #value-deserializer: org.apache.kafka.common.serialization.StringDeserializer#Oldway
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: '*'
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      #value-serializer: org.apache.kafka.common.serialization.StringSerializer#Oldway
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    topic:
+      name: first_topic
+      json_name: first_json_topic
